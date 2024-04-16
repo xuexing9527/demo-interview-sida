@@ -125,11 +125,22 @@ export default {
     
     console.log('I am comming...')
     console.log((global as any).userInfo)
+
+    interface UserBase {
+      password: string;
+      username: string;
+    }
+
+    interface UserInfo  extends UserBase {
+      email?: string;
+    }
+
     // 这里也应 判读 基本的数据 格式是否符合...
     // checkData() ...  此处省略，默认通过检查
-    const { password, username, type } = req.body;
-    // 从 global 获取 userInfo，当作查询 sql 到的 userInfo
-    const userInfo = (global as any).userInfo
+    const { password, username, type }: UserBase & { type: string; } = req.body
+    // 从 global 获取 userInfo，当作查询 sql 得到的 userInfo
+    const userInfo: UserInfo = (global as any).userInfo
+
     await waitTime(1000);
 
     // 比较 密码 和 用户名（email），密码一般为md5加密，这里略去，只做了简单比较

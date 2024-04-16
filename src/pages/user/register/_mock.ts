@@ -34,12 +34,9 @@ const checkData = (params: UserInfo): CheckMsg => {
 export default {
   'POST  /api/register': (req: Request, res: Response) => {
 
-    const { email, password, mobile } = req.body
-    const userInfo: UserInfo = {
-      email: email,
-      password: password,
-      mobile: mobile
-    };
+    const { email, password, mobile }: UserInfo = req.body
+
+    const userInfo: UserInfo = { email, password, mobile }
 
     const checkMsg: CheckMsg = checkData(userInfo)
 
